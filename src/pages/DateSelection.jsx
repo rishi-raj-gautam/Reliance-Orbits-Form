@@ -258,7 +258,7 @@ const DateSelection = () => {
                                                         </div>
                                                         <div className="font-medium text-sm">
                                                             {/* {count === 0 ? 'Driver Only' : `${count} Person${count > 1 ? 's' : ''}`} */}
-                                                            {count === 0 ? 'Customer loading & unloading' : count === 1 ? 'Driver Only' : `Driver+${count-1} Person${count > 2 ? 's' : ''}` }
+                                                            {count === 0 ? 'Customer loading & unloading' : count === 1 ? 'Driver Help' : `Driver+${count-1} Person${count > 2 ? 's' : ''}` }
                                                         </div>
                                                     </button>
                                                 ))}
