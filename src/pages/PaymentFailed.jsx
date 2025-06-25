@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { AlertTriangle, RefreshCw, ArrowLeft, HelpCircle } from 'lucide-react';
+import { useNavigate} from 'react-router-dom';
+
 
 export default function PaymentFailed() {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleRetry = () => {
@@ -11,6 +14,23 @@ export default function PaymentFailed() {
       setIsLoading(false);
     }, 2000);
   };
+
+  const today = new Date(); // or use new Date('2025-06-25') for a fixed date
+
+const day = today.getDate();
+const month = today.toLocaleString('default', { month: 'long' });
+const year = today.getFullYear();
+
+// Function to get ordinal suffix
+function getOrdinal(n) {
+  const s = ["th", "st", "nd", "rd"];
+  const v = n % 100;
+  return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}
+
+const formattedDate = `${getOrdinal(day)} ${month}, ${year}`;
+
+
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center p-4">
@@ -30,7 +50,7 @@ export default function PaymentFailed() {
             <h2 className="text-sm font-medium text-gray-700 mb-2">Error details</h2>
             <div className="bg-gray-50 rounded-md p-4 text-sm text-gray-600">
               <p className="mb-1"><span className="font-semibold">Error code:</span> PAYMENT_DECLINED</p>
-              <p className="mb-1"><span className="font-semibold">Date:</span> May 17, 2025</p>
+              <p className="mb-1"><span className="font-semibold">Date:</span> {formattedDate}</p>
               <p><span className="font-semibold">Message:</span> The card issuer declined the transaction.</p>
             </div>
           </div>
@@ -62,7 +82,9 @@ export default function PaymentFailed() {
             </button>
             
             <div className="flex space-x-3">
-              <button className="flex-1 flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+              <button className="flex-1 flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              onClick={() => navigate('/booking-details')}
+              >
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back
               </button>
