@@ -15,7 +15,7 @@ const LocationForm = () => {
     setpickupAddressWithPostalCode,
     dropAddressWithPostalCode,
     setdropAddressWithPostalCode,
-    extraStops, setExtraStops } = useBooking();
+    extraStops, setExtraStops, service, setService } = useBooking();
 
   const [pickupQuery, setPickupQuery] = useState(pickup.location || '');
   const [deliveryQuery, setDeliveryQuery] = useState(delivery.location || '');
@@ -166,6 +166,12 @@ const LocationForm = () => {
       });
     });
   }, [deliveryPlaceId]);
+
+   useEffect(()=>{
+    setService("Furniture Removal");
+    console.log(service);
+
+  },[setService])
 
   async function getPostalCode(place_id) {
     const response = await axios.get(`${baseUrl}/postalcode/` + place_id);

@@ -27,7 +27,8 @@ const Confirmation = () => {
     totalPrice,
     van,
     itemsToAssemble,
-    itemsToDismantle
+    itemsToDismantle,
+    service, setService
   } = useBooking();
 
   const [submitError, setSubmitError] = useState(null);
@@ -105,11 +106,16 @@ const Confirmation = () => {
     <div className="min-h-screen bg-gray-50">
       {/* <Header title="Booking Confirmed!" /> */}
 
-      <div className="max-w-3xl mx-auto px-4 py-8">
-        <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-8 text-center mb-8 shadow">
+      <div className="max-w-3xl mx-auto px-4 py-8 flex-col">
+        <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-8 text-center mb-8 shadow flex-col justify-center items-center">
           <div className="bg-green-500 text-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-5 text-3xl font-bold shadow-lg">✓</div>
-          <h2 className="text-3xl font-bold text-gray-800 mb-3">Thank you for your Quotation!</h2>
-          <p className="text-gray-700">We have sent a Quote confirmation email to <span className="font-medium">{customerDetails?.name || "you"}</span> at <span className="font-medium">{quoteDetails?.email || "your email"}</span></p>
+          <h2 className="text-3xl font-bold text-gray-800 mb-3">You are so close!</h2>
+          {/* <p className="text-gray-700">We have sent a Quote confirmation email to <span className="font-medium">{customerDetails?.name || "you"}</span> at <span className="font-medium">{quoteDetails?.email || "your email"}</span></p> */}
+          <p className="text-gray-700">Hi <span className="font-medium">{customerDetails?.name || "you"}</span> </p>
+          <p className="text-gray-700 ">Thank you for choosing Reliance Move </p>
+          <p className="text-gray-700 ">You are only few steps for completing your quote for {service}</p>
+          <p className="text-gray-700 font-bold mt-2">Here is the Summary of your quote so far</p>
+          <div className='bg-blue-500 h-1 w-16 mx-auto mt-3'></div>
         </div>
 
         <div className="bg-white rounded-xl shadow overflow-hidden mb-8">
@@ -274,25 +280,25 @@ const Confirmation = () => {
           </div>
 
           <div className="p-6 border-b border-gray-200">
-  <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-    </svg>
-    Customer Details
-  </h3>
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div className="bg-gray-50 p-4 rounded-lg">
-      <div className="text-sm font-medium text-gray-500">Name</div>
-      <div className="font-medium text-gray-800">{customerDetails?.name || "Not provided"}</div>
-    </div>
-    <div className="bg-gray-50 p-4 rounded-lg">
-      <div className="text-sm font-medium text-gray-500">Phone</div>
-      <div className="font-medium text-gray-800">{customerDetails?.phone || "Not provided"}</div>
-    </div>
-  </div>
-</div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              Customer Details
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <div className="text-sm font-medium text-gray-500">Name</div>
+                <div className="font-medium text-gray-800">{customerDetails?.name || "Not provided"}</div>
+              </div>
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <div className="text-sm font-medium text-gray-500">Phone</div>
+                <div className="font-medium text-gray-800">{customerDetails?.phone || "Not provided"}</div>
+              </div>
+            </div>
+          </div>
 
-          <div className="p-6 border-b border-gray-200">  
+          <div className="p-6 border-b border-gray-200">
             <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />

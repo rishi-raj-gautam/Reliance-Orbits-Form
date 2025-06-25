@@ -26,6 +26,7 @@ const PianoLocationForm = () => {
     setdropAddressWithPostalCode,
     extraStops,
     setExtraStops,
+    service, setService
   } = useBooking();
 
   // State for address inputs and autocomplete
@@ -108,6 +109,12 @@ const PianoLocationForm = () => {
       return containsUK(cleanAddress) ? cleanAddress : `${cleanAddress}, UK`;
     }
   };
+
+   useEffect(()=>{
+    setService("Piano Removal");
+    console.log(service);
+
+  },[setService])
 
   // Validation functions
   const validatePickupAddress = () => {

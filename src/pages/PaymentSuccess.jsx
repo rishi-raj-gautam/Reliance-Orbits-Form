@@ -31,7 +31,8 @@ const PaymentSuccess = () => {
         setItemsToAssemble, setItemsToDismantle,
         itemsList, setItemsList,
         quantities, setQuantities,
-        setQuoteDetails,quoteDetails
+        setQuoteDetails,quoteDetails,
+        service, setService
     } = useBooking();
 
     // let called = false;
@@ -81,6 +82,8 @@ const PaymentSuccess = () => {
                     duration: order.duration || '',
                     route: order.route || 'default route'
                 });
+
+                setService(order.details.service);
 
                 setQuoteDetails(
                     {...quoteDetails,

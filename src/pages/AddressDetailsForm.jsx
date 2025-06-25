@@ -12,7 +12,7 @@ const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const AddressDetailsForm = () => {
   const navigate = useNavigate();
-  const { pickup, setPickup, delivery, setDelivery, extraStops, setExtraStops, selectedDate, setSelectedDate } = useBooking();
+  const { pickup, setPickup, delivery, setDelivery, extraStops, setExtraStops, selectedDate, setSelectedDate, service, setService } = useBooking();
 
   // State for date selection
   const [hasSelectedDate, setHasSelectedDate] = useState(true);
@@ -111,6 +111,12 @@ const AddressDetailsForm = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  useEffect(()=>{
+    setService("Home Removal");
+    console.log(service);
+
+  },[setService])
 
   /**
    * Generates days array for the current month view including previous/next month days

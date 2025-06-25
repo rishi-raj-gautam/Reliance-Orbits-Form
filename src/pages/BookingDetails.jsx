@@ -82,7 +82,8 @@ const BookingDetails = () => {
     itemsToDismantle,
     bookingRef, setBookingRef,
     additionalServices,
-    quoteDetails, setQuoteDetails
+    quoteDetails, setQuoteDetails,
+    service
   } = useBooking();
 
   const [termsAccepted, setTermsAccepted] = useState(false);
@@ -420,6 +421,7 @@ const BookingDetails = () => {
             propertyType: delivery.propertyType || "standard"
           },
           details: {
+            service: service || '',
             items: {
               name: items.map(item => item.name) || [],
               quantity: items.map(item => item.quantity) || [],
@@ -492,6 +494,7 @@ const BookingDetails = () => {
             propertyType: delivery.propertyType || "standard"
           },
           details: {
+            service: service || '',
             items: {
               name: items.map(item => item.name) || [],
               quantity: items.map(item => item.quantity) || [],

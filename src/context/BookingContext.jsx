@@ -33,6 +33,7 @@ export const BookingProvider = ({ children }) => {
         aboutUs: true
 
     })
+    const [service, setService] = useState('')
 
     const [delivery, setDelivery] = useState({
         location: '',
@@ -189,7 +190,8 @@ export const BookingProvider = ({ children }) => {
             removeExtraStop,
             quoteDetails, setQuoteDetails,
             itemsList, setItemsList,
-            quantities,setQuantities
+            quantities,setQuantities,
+            service, setService
 
         }}>
             {children}

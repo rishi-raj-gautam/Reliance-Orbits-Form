@@ -23,7 +23,8 @@ const QuoteConfirmation = () => {
     itemsToAssemble,
     itemsToDismantle,
     itemsList,
-    quantities
+    quantities,
+    service
   } = useBooking();
 
 
@@ -75,7 +76,10 @@ const QuoteConfirmation = () => {
         <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-8 text-center mb-8 shadow">
           <div className="bg-green-500 text-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-5 text-3xl font-bold shadow-lg">✓</div>
           <h2 className="text-3xl font-bold text-gray-800 mb-3">Thank you for your booking!</h2>
-          <p className="text-gray-700">We have sent a confirmation email to <span className="font-medium">{customerDetails?.name || "you"}</span> at <span className="font-medium">{quoteDetails?.email || "your email"}</span></p>
+          <p className="text-gray-700">Hi <span className="font-medium">{customerDetails?.name || "you"}</span> </p>
+          <p className="text-gray-700">We have sent a confirmation email to <span className="font-medium">{quoteDetails?.email || "your email"}</span></p>
+          <p className="text-gray-700 font-bold mt-2">Here's a Summary of your Booking for {service}</p>
+          <div className='bg-blue-500 h-1 w-16 mx-auto mt-3'></div>
         </div>
 
         <div className="bg-white rounded-xl shadow overflow-hidden mb-8">
