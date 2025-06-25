@@ -98,7 +98,7 @@ const formattedDate = `${getOrdinal(day)} ${month}, ${year}`;
       </div>
       
       <p className="mt-6 text-sm text-gray-500">
-        Need assistance? Contact support at <span className="text-blue-600">support@example.com</span>
+        Need assistance? Contact support at <span className="text-blue-600">info@reliancemove.com</span>
       </p>
     </div>
   );
