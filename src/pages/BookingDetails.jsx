@@ -52,6 +52,15 @@ const BookingDetails = () => {
     delivery: ''
   });
 
+  const [showTermsModal, setShowTermsModal] = useState(false);
+
+
+  const [contactNameErrors, setContactNameErrors] = useState({
+    pickup: '',
+    delivery: '',
+    customer: ''
+  });
+
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [isBookingCreating, setIsBookingCreating] = useState(false);
 
@@ -293,6 +302,17 @@ const BookingDetails = () => {
     return !errors.customer && !errors.pickup && !errors.delivery;
   };
 
+  const validateContactNames = () => {
+    const errors = {
+      pickup: pickup.contactName?.trim() ? '' : 'Contact name is required',
+      delivery: delivery.contactName?.trim() ? '' : 'Contact name is required',
+      customer: customerDetails.name?.trim() ? '' : 'Contact name is required',
+    };
+
+    setContactNameErrors(errors);
+    return !errors.pickup && !errors.delivery && !errors.customer;
+  };
+
   const validateExtraStops = (stops) => {
     if (!Array.isArray(stops) || stops.length === 0) return [];
 
@@ -345,8 +365,9 @@ const BookingDetails = () => {
   const handleBookingCreation = async () => {
     const termsValid = validateTermsAndConditions();
     const phonesValid = validateAllPhones();
+    const contactNamesValid = validateContactNames();
 
-    if (!termsValid || !phonesValid) {
+    if (!termsValid || !phonesValid || !contactNamesValid) {
       setSubmitError('Please correct the errors above');
       return false;
     }
@@ -692,14 +713,23 @@ const BookingDetails = () => {
                       <input
                         type="text"
                         placeholder="Contact Name at Pickup"
-                        className="w-full px-3 py-2 text-sm border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 bg-white/50 backdrop-blur-sm"
+                        className={`w-full px-3 py-2 text-sm border-2 rounded-lg focus:ring-2 transition-all duration-200 bg-white/50 backdrop-blur-sm ${contactNameErrors.pickup ? 'border-red-500 focus:ring-red-200' : 'border-gray-200 focus:border-blue-500 focus:ring-blue-200'
+                          }`}
                         value={pickup.contactName || ''}
                         onChange={(e) => {
                           setCustomerDetails({ ...customerDetails, name: e.target.value });
-                          handlePickupChange('contactName', e.target.value)
+                          handlePickupChange('contactName', e.target.value);
                         }}
                         required
                       />
+                      {contactNameErrors.pickup && (
+                        <div className="text-red-500 text-xs mt-1 flex items-center">
+                          <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                          </svg>
+                          {contactNameErrors.pickup}
+                        </div>
+                      )}
                       <div className="relative">
                         <input
                           type="tel"
@@ -803,11 +833,20 @@ const BookingDetails = () => {
                       <input
                         type="text"
                         placeholder="Contact Name at Delivery"
-                        className="w-full px-3 py-2 text-sm border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 bg-white/50 backdrop-blur-sm"
+                        className={`w-full px-3 py-2 text-sm border-2 rounded-lg focus:ring-2 transition-all duration-200 bg-white/50 backdrop-blur-sm ${contactNameErrors.delivery ? 'border-red-500 focus:ring-red-200' : 'border-gray-200 focus:border-blue-500 focus:ring-blue-200'
+                          }`}
                         value={delivery.contactName || ''}
                         onChange={(e) => handleDeliveryChange('contactName', e.target.value)}
                         required
                       />
+                      {contactNameErrors.delivery && (
+                        <div className="text-red-500 text-xs mt-1 flex items-center">
+                          <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                          </svg>
+                          {contactNameErrors.delivery}
+                        </div>
+                      )}
                       <div className="relative">
                         <input
                           type="tel"
@@ -851,10 +890,19 @@ const BookingDetails = () => {
                           // setPickup({ ...pickup, contactName: newName });
                           setCustomerDetails({ ...customerDetails, name: newName });
                         }}
-                        className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 bg-white/70"
+                        className={`w-full px-3 py-2 text-sm border-2 rounded-lg focus:ring-2 transition-all duration-200 bg-white/50 backdrop-blur-sm ${contactNameErrors.customer ? 'border-red-500 focus:ring-red-200' : 'border-gray-200 focus:border-blue-500 focus:ring-blue-200'
+                          }`}
                         placeholder="Enter your full name"
                         required
                       />
+                      {contactNameErrors.customer && (
+                        <div className="text-red-500 text-xs mt-1 flex items-center">
+                          <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                          </svg>
+                          {contactNameErrors.customer}
+                        </div>
+                      )}
                     </div>
 
                     <div>
@@ -962,7 +1010,11 @@ const BookingDetails = () => {
                         }`}
                     />
                     <label htmlFor="terms" className="ml-2 block text-sm text-gray-700">
-                      I agree to the <a href="#" className="text-blue-600 hover:underline font-medium">Terms and Conditions</a> and <a href="#" className="text-blue-600 hover:underline font-medium">Data Protection Policy</a>
+                      I agree to the
+                      <button type="button" onClick={() => setShowTermsModal(true)} className="text-blue-600 hover:underline font-medium ml-1">
+                        Read Terms and Conditions
+                      </button>
+
                     </label>
                   </div>
 
@@ -1157,6 +1209,83 @@ const BookingDetails = () => {
           </div>
         </div>
       )}
+
+      {showTermsModal && (
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4">
+          <div className="bg-white p-6 rounded-xl max-w-lg w-full shadow-lg">
+            <h2 className="text-xl font-bold mb-4">Terms and Conditions</h2>
+            <div className="space-y-4 text-sm text-gray-700 max-h-72 overflow-y-auto pr-2">
+  <p><strong>RELIANCEMOVE LTD</strong> is a registered limited company in England (Company No: 16429125), operating from Unit 19, LONGHAYES AVENUE, ROMFORD, RM6 5HB.</p>
+
+  <p>Reliancemove operates a booking platform for individuals, groups, or corporate bodies to get affordable quotes for removal jobs and book services if satisfied.</p>
+
+  <p><strong>Before booking</strong>, please read our terms carefully as they define who we are and what we offer. Services are subject to booking confirmation and driver availability.</p>
+
+  <h4 className="font-semibold text-gray-800">QUOTATIONS AND PAYMENTS</h4>
+  <ul className="list-disc list-inside space-y-1">
+    <li>Quotes are based on provided information; changes may result in revised quotes.</li>
+    <li>All payment terms must be agreed upon before the service date.</li>
+    <li>Full payment is due at the time of booking; confirmation email will follow.</li>
+    <li>Additional charges may apply for delays caused by incorrect info or access issues.</li>
+  </ul>
+
+  <h4 className="font-semibold text-gray-800">BOOKING AND CANCELLATION</h4>
+  <ul className="list-disc list-inside space-y-1">
+    <li>Bookings must be confirmed via email or text.</li>
+    <li>Full refund available if cancellation occurs within 2 hours of booking.</li>
+    <li>Rescheduling must be requested at least 48 hours in advance and is subject to availability.</li>
+    <li>A booking is considered serviced once the trip from pickup to delivery is completed.</li>
+  </ul>
+
+  <h4 className="font-semibold text-gray-800">CUSTOMER RESPONSIBILITIES</h4>
+  <ul className="list-disc list-inside space-y-1">
+    <li>Ensure all items are packed securely unless packing service is included.</li>
+    <li>Declare and label all fragile or valuable items.</li>
+    <li>Arrange parking and permits at both pickup and delivery locations.</li>
+    <li>Be present or assign an authorized representative at both ends.</li>
+  </ul>
+
+  <h4 className="font-semibold text-gray-800">LIMITATION AND LIABILITY</h4>
+  <ul className="list-disc list-inside space-y-1">
+    <li>Not liable for damage to items not packed by us unless due to negligence.</li>
+    <li>Not responsible for delays caused by weather, traffic, or external factors.</li>
+    <li>Drivers are vetted; proven negligence is covered by driver’s insurance.</li>
+  </ul>
+
+  <h4 className="font-semibold text-gray-800">INSURANCE</h4>
+  <p>Claims must be made within 7 days directly to the driver’s insurance company.</p>
+
+  <h4 className="font-semibold text-gray-800">EXCLUDED ITEMS</h4>
+  <ul className="list-disc list-inside space-y-1">
+    <li>Hazardous materials, illegal items, perishable goods, and animals are not allowed.</li>
+    <li>Drivers may refuse to move items deemed unsafe or illegal.</li>
+  </ul>
+
+  <h4 className="font-semibold text-gray-800">ACCESS AND DELAYS</h4>
+  <ul className="list-disc list-inside space-y-1">
+    <li>Provide clear access at both pickup and delivery points.</li>
+    <li>Charges may apply for delays caused by poor access or customer issues.</li>
+  </ul>
+
+  <h4 className="font-semibold text-gray-800">DISPUTES AND GOVERNING LAW</h4>
+  <ul className="list-disc list-inside space-y-1">
+    <li>Disputes are handled in accordance with local consumer laws.</li>
+    <li>These terms are governed by the laws of the United Kingdom.</li>
+  </ul>
+</div>
+
+            <div className="mt-4 flex justify-end">
+              <button
+                onClick={() => setShowTermsModal(false)}
+                className="flex items-center space-x-2 px-5 py-2 rounded-xl font-medium shadow-lg transition-all duration-200 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 hover:shadow-xl transform hover:-translate-y-0.5 text-white disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
