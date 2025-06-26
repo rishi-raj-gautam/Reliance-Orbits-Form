@@ -468,7 +468,7 @@ const Confirmation = () => {
           </button>
 
 
-          <button
+          {/* <button
             onClick={(e) => {
 
               handlePayment(e);
@@ -478,11 +478,21 @@ const Confirmation = () => {
           >
             <CreditCard className="w-6 h-6 mr-3" />
             Pay Now
-          </button>
+          </button> */}
 
 
         </div>
       </div>
+      {/* Floating Pay Now Button */}
+<button
+  onClick={(e) => {
+    handlePayment(e);
+  }}
+  className="fixed bottom-6 right-6 bg-green-500 text-white font-medium py-4 px-6 rounded-md shadow-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-opacity-50 transition-all duration-200 transform hover:scale-105 z-50 flex items-center justify-center"
+>
+  <CreditCard className="w-6 h-6 mr-2" />
+  Pay Now
+</button>
     </div>
   );
 };
