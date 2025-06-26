@@ -259,6 +259,7 @@ const Nav = () => {
                                             className="block py-2 text-sm text-gray-600 hover:text-blue-900 transition-colors"
                                             onClick={(e) => {
                                                 e.preventDefault();
+                                                window.location.href = 'https://reliancemove.com/other-removals/';
                                                 closeMobileMenu();
                                             }}
                                         >
@@ -272,7 +273,7 @@ const Nav = () => {
                             <div className="pt-2">
                                 <button
                                     className="w-full bg-red-500 hover:bg-red-600 text-white px-6 py-3 font-semibold transition-colors"
-                                    onClick={closeMobileMenu}
+                                    onClick={() => window.location.href = 'https://reliancemove.com/contact-us/'}
                                 >
                                     CONTACT US
                                 </button>

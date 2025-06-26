@@ -112,11 +112,11 @@ const AddressDetailsForm = () => {
     };
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     setService("Home Removal");
     console.log(service);
 
-  },[setService])
+  }, [setService])
 
   /**
    * Generates days array for the current month view including previous/next month days
@@ -743,6 +743,9 @@ const AddressDetailsForm = () => {
 
                 {/* Estimated Move Date Section */}
                 {/* Estimated Move Date Section - Compact Version */}
+
+
+                {/* Estimated Move Date Section - Mobile Responsive Version */}
                 <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 mb-6 border border-blue-100">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center space-x-2">
@@ -754,8 +757,8 @@ const AddressDetailsForm = () => {
                   </div>
 
                   <div className="space-y-3">
-                    {/* Inline Date Selection */}
-                    <div className="flex items-center justify-between">
+                    {/* Inline Date Selection - Responsive */}
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
                       <label className="flex items-center cursor-pointer">
                         <input
                           type="radio"
@@ -763,13 +766,13 @@ const AddressDetailsForm = () => {
                           name="dateOption"
                           checked={hasSelectedDate}
                           onChange={() => setHasSelectedDate(true)}
-                          className="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                          className="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500 flex-shrink-0"
                         />
                         <span className="ml-2 text-sm font-medium text-gray-700">I have a date</span>
                       </label>
 
                       {hasSelectedDate && (
-                        <div className="flex items-center space-x-3">
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 space-y-2 sm:space-y-0 sm:ml-0 ml-6">
                           <div className="relative">
                             <input
                               type="text"
@@ -779,7 +782,7 @@ const AddressDetailsForm = () => {
                                 setLocalSelectedDate(pickupDate);
                                 setShowCalendar(true);
                               }}
-                              className="w-40 px-3 py-2 text-sm border border-gray-200 rounded-lg cursor-pointer bg-white hover:border-blue-300 transition-colors"
+                              className="w-full sm:w-40 px-3 py-2 text-sm border border-gray-200 rounded-lg cursor-pointer bg-white hover:border-blue-300 transition-colors"
                               placeholder="Select date"
                             />
                             <span
