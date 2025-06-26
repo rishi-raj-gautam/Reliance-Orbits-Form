@@ -161,6 +161,7 @@ const Nav = () => {
                                                 className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-900 transition-colors"
                                                 onClick={(e) => {
                                                     e.preventDefault();
+                                                    window.location.href = 'https://reliancemove.com/other-removals/';
                                                     closeServicesDropdown();
                                                 }}
                                             >
