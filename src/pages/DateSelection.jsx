@@ -223,7 +223,7 @@ const DateSelection = () => {
                                                     <option value="" disabled>Select Van Type</option>
                                                     {vanOptions.map((option) => (
                                                         <option key={option.type} value={option.type}>
-                                                            {option.emoji} {option.type} - £{option.price}/hr
+                                                            {option.emoji} {option.type} 
                                                         </option>
                                                     ))}
                                                 </select>
